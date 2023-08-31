@@ -1,0 +1,91 @@
+.movie-card {
+	width: 100%;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.movie-card__image {
+	height: 201px;
+	border-radius: 6px;
+	object-fit: cover;
+}
+.movie-card__like {
+	position: absolute;
+	right: 14px;
+	top: 14px;
+	width: 72px;
+	height: 21px;
+	background-color: #313131;
+	background-image: url(../../images/icons/save-film.svg);
+	background-size: contain;
+	border: none;
+	border-radius: 12px;
+	cursor: pointer;
+	display: none;
+ }
+ 
+ .movie-card:hover .movie-card__like {
+	display: block;
+}
+
+.movie-card__like_active {
+	position: absolute;
+	right: 14px;
+	top: 14px;
+	width: 21px;
+	height: 21px;
+	background-image: url(../../images/icons/saved-film.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	border: none;
+	border-radius: 12px;
+	background-color: #313131;
+	display: block;
+}
+
+.movie-card__delete {
+	position: absolute;
+	right: 14px;
+	top: 14px;
+	width: 21px;
+	height: 21px;
+	background-image: url(../../images/icons/delete-film.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	border: none;
+	border-radius: 12px;
+	background-color: #313131;
+}
+
+.movie-card__info {
+	margin: 14px 14px 30px 14px;
+	display: flex;
+	justify-content: space-between;
+}
+.movie-card__title {
+	margin: 0;
+	padding: 0;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: auto;
+}
+
+.movie-card__duration {
+	margin: 0;
+	padding: 0;
+	width: 52px;
+	height: 18px;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #8b8b8b;
+	background-color: #2f2f2f;
+	border-radius: 3px;
+}

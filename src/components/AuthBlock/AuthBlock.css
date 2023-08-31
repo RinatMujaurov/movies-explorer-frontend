@@ -1,0 +1,49 @@
+.auth-block {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.auth-block__link{
+	margin: 0;
+	padding: 0;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 16px;
+	color: white;
+	text-decoration: none;
+}
+
+.login-btn {
+	margin-left: 30px;
+	padding: 8px 20px;
+	border-radius: 3px;
+	color: #000;
+	background-color: #3DDC84;
+}
+
+@media (max-width: 899px) {
+	.auth-block {
+		margin-right: 30px;
+	}
+}
+
+@media (max-width: 679px) {
+	.logo {
+		margin-right: 14px;
+	}
+
+	.auth-block {
+		margin-right: 14px;
+	}
+
+	.auth-block__link {
+		font-size: 10px;
+	}
+
+	.login-btn {
+		margin-left: 14px;
+		padding: 5px 12px;
+	}
+}
