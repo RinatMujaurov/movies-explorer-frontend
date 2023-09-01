@@ -44,6 +44,16 @@
 	text-decoration: none;
 }
 
+@media (max-width: 1139px) {
+	.footer__copyright {
+		margin: 0 20px;
+	}
+
+	.footer__nav {
+		margin: 0 20px;
+	}
+}
+
 @media (max-width: 899px) {
 	.footer {
 		max-width: 708px;

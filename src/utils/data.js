@@ -125,21 +125,21 @@ const moviesData = [
 
 const savedMoviesData = [
 	{
-	  name: "33 слова о дизайне",
+	  title: "33 слова о дизайне",
 	  duration: "1ч 17м",
 	  link: `${film1}`,
 	  movieId: 1,
 	  delete: "movie-card__delete",
 	},
 	{
-	  name: "Киноальманах «100 лет дизайна»",
+	  title: "Киноальманах «100 лет дизайна»",
 	  duration: "1ч 17м",
 	  link: `${film2}`,
 	  movieId: 2,
 	  delete: "movie-card__delete",
 	},
 	{
-	  name: "В погоне за Бенкси",
+	  title: "В погоне за Бенкси",
 	  duration: "1ч 17м",
 	  link: `${film3}`,
 	  movieId: 3,

@@ -4,12 +4,19 @@ import useFormAndValidation from '../../hooks/useFormAndValidation';
 import './Login.css';
 
 function Login() {
-  const {
-    values,
-    handleChange,
-    errors,
-    isValid,
-  } = useFormAndValidation();
+	const {
+		values,
+		handleChange,
+		errors,
+		isValid,
+		setValues,
+		setIsValid,
+	 } = useFormAndValidation();
+
+	 const handleSubmit = (e) => {
+		e.preventDefault();
+		// код сабмита
+	 };
 
   return (
     <section className="login">
@@ -17,7 +24,7 @@ function Login() {
         <Link to="/" className="login__logo" alt="logo">
         </Link>
         <h2 className="login__title">Рады видеть!</h2>
-        <form className="login__form" noValidate>
+        <form className="login__form" onSubmit={handleSubmit}>
           <label className="login__label">
             <span className="login__label-text">Email</span>
             <input

@@ -6,7 +6,7 @@
 	background-image: url(../../images/icons/logo.svg);
 }
 
-@media (max-width: 899px) {
+@media (max-width: 1139px) {
 	.logo {
 		margin-left: 30px;
 	}

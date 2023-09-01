@@ -47,9 +47,9 @@ function Navigation() {
 							Сохраненные фильмы
 						</NavLink>
 					</div>
-					<div className='navigation__account-btn'>
+					<button type='button' className='navigation__account-btn'>
 						<Link className='button-hover link navigation__link' to="/profile">Аккаунт</Link>
-					</div>
+					</button>
 				</div>
 				<div className={`button-hover burger ${isBurgerOpen ? 'active' : ''}`} onClick={handleBurgerClick}>
 					<span></span>

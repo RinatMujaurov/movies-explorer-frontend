@@ -35,7 +35,7 @@
 	line-height: 16px;
 }
 
-@media (max-width: 899px) {
+@media (max-width: 1139px) {
 	.nav-tab__block {
 		margin: 20px 20px 0 20px;
 	}

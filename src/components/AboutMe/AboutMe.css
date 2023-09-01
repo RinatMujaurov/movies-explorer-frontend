@@ -113,9 +113,25 @@
 	background:  url('../../images/icons/portfolio-link.svg') center/contain no-repeat;
  }
 
+ @media (max-width: 1139px) {
+	.about-me {
+		margin: 0 20px;
+	}
+}
+
+ /* @media (max-width: 1279px) {
+	.info {
+		margin: 66px 20px 0 20px;
+	}
+	
+	.portfolio {
+		margin: 0 20px;
+	}
+ } */
+
  @media (max-width: 899px) {
 	.about-me{
-		max-width: 668px;
+		margin: 0 20px;
 	}
 
 	.info {
@@ -135,7 +151,6 @@
 	
 	.info__description {
 		margin-top: 20px;
-		max-width: 364px;
 		font-size: 12px;
 		line-height: 18px;
 	}
@@ -161,14 +176,12 @@
 
 
  @media (max-width: 679px) {
-	.about-me{
-		max-width: 292px;
-	}
 
 	.info {
 		margin-top: 60px;
 		grid-template-columns: 100%;
 		justify-content: center;
+		
 	}
 
 	.info__title {

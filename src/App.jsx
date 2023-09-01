@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Main from './pages/Main/Main';
@@ -13,13 +13,10 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import './App.css';
 
 function App() {
-  const location = useLocation();
-
-  const isLoginPage = location.pathname === '/sign-in' || location.pathname === '/sign-up';
 
   return (
-    <div className="page">
-       {!isLoginPage && <Header />}
+    <div className="page" lang="ru">
+      <Header />
       <main className='main'>
         <Routes>
           <Route path="/" element={<Main />} />
@@ -31,7 +28,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-      {!isLoginPage && <Footer />}
+      <Footer />
     </div>
   );
 }

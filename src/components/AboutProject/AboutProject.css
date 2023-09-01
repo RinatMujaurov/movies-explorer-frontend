@@ -90,6 +90,12 @@
 	margin-bottom: 110px;
 }
 
+@media (max-width: 1139px) {
+	.about-project {
+		margin: 0 20px;
+	}
+}
+
 @media (max-width: 899px) {
 	.about-project__info-block {
 		max-width: 668px;
@@ -103,13 +109,11 @@
 
 	.about-project__graphic {
 		margin-top: 93px;
-		max-width: 668px;
 	}
 }
 
 @media (max-width: 679px) {
 	.about-project__info-block {
-		max-width: 284px;
 		flex-direction: column;
 		gap: 0px;
 	}
@@ -130,7 +134,6 @@
 
 	.about-project__graphic {
 		margin-top: 60px;
-		max-width: 284px;
 	}
 
 	.about-project__terms {

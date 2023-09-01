@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { ROUTES_WITH_FOOTER } from '../../utils/constants/routes-constants';
 import './Footer.css';
 
 function Footer() {
+  const { pathname } = useLocation();
+  const hasFooter = ROUTES_WITH_FOOTER.includes(pathname);
   const [currentYear, setCurrentYear] = useState("");
 
   useEffect(() => {
@@ -11,6 +14,7 @@ function Footer() {
   }, []);
 
 	return(
+		hasFooter && (
 		<footer className="footer">
 			<p className="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
 			<div className="footer__container">
@@ -35,6 +39,7 @@ function Footer() {
 				</nav>
 			</div>
 		</footer>
+		)
 	)
 }
 

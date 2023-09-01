@@ -1,6 +1,5 @@
 .open{
 	display: flex !important;
-	gap: 621px;
 	align-items: center;
 }
 
@@ -46,10 +45,10 @@
 }
 
 .navigation__account-btn {
+	padding: 8px 20px;
+	border: none;
 	background-color: #313131;
 	border-radius: 20px;
-	width: 100px;
-	height: 32px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -122,6 +121,12 @@
 	}
  }
 
+ @media (max-width: 1139px) {
+	.navigation {
+		margin-right: 30px;
+	}
+ }
+
 @media (max-width: 899px) {
 	.navigation {
 		margin-right: 30px;
@@ -133,12 +138,12 @@
 
 	.burger { 
 		display: flex;
-		
 	}
 
 	.navigation__menu-block{
 		 display: none;
 		 flex-direction: column;
+		 justify-content: space-between;
 		 position: fixed;
 		 height: 100%;
 		 width: 70%;
@@ -154,6 +159,10 @@
 		 margin-top: 159px;
 		 flex-direction: column;
 		 row-gap: 30px;
+	}
+
+	.navigation__account-btn {
+		margin-bottom: 90px;
 	}
 
 	.navigation__overlay_open {
@@ -174,9 +183,10 @@
 		width: 100%;
   }
 
-  .open{
-	gap: 444px;
+  .navigation__account-btn {
+	margin-bottom: 46px;
 }
+
 }
 
 @keyframes burgerAnimation {
