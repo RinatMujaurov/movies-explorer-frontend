@@ -1,0 +1,143 @@
+.about-project {
+	margin: 0;
+	padding: 0;
+	color: white;
+}
+
+.about-project__header {
+	margin: 0 auto;
+	padding: 0;
+	margin-top: 110px;
+	max-width: 1140px;
+	border-bottom: 1px solid #DADADA;
+}
+
+.main__subtitle {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 23px;
+	font-weight: 400;
+	font-size: 22px;
+	line-height: auto;
+	letter-spacing: -4%;
+}
+
+.about-project__info-block {
+	margin: 0 auto;
+	max-width: 1140px;
+	display: flex;
+	gap: 40px;
+}
+
+.about-project__info {
+	margin: 70px 0 0 0;
+	padding: 0;
+}
+
+.about-project__info_subtitle {
+	margin: 0;
+	padding: 0;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: auto;
+	letter-spacing: -4%;
+}
+
+.about-project__info_text {
+	margin: 0;
+	padding: 0;
+	margin-top: 26px;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.about-project__graphic {
+	margin: 0 auto;
+	padding: 0;
+	margin-top: 110px;
+	max-width: 1140px;
+	display: grid;
+	grid-template-columns: 20% 80%;
+}
+
+.about-project__terms {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: auto;
+	text-align: center;
+}
+
+.backend {
+	color: #000;
+	background-color: #3DDC84;
+}
+
+.about-project__term {
+	margin: 0;
+	padding: 9px 0;
+}
+
+.frontend {
+	background-color: #303030;
+}
+
+.about-project__tech {
+	color: #8B8B8B;
+	margin: 0;
+	padding: 0;
+	margin-top: 14px;
+	margin-bottom: 110px;
+}
+
+@media (max-width: 1139px) {
+	.about-project {
+		margin: 0 20px;
+	}
+}
+
+@media (max-width: 899px) {
+	.about-project__info-block {
+		max-width: 668px;
+	}
+
+	.about-project__info_text {
+		margin-top: 22px;
+		font-size: 12px;
+		line-height: 18px;
+	}
+
+	.about-project__graphic {
+		margin-top: 93px;
+	}
+}
+
+@media (max-width: 679px) {
+	.about-project__info-block {
+		flex-direction: column;
+		gap: 0px;
+	}
+
+	.about-project__info {
+		margin-top: 60px;
+	}
+
+	.about-project__info_subtitle {
+		font-size: 18px;
+	}
+
+	.about-project__info_text {
+		margin-top: 16px;
+		font-size: 11px;
+		line-height: 16px;
+	}
+
+	.about-project__graphic {
+		margin-top: 60px;
+	}
+
+	.about-project__terms {
+		font-size: 11px;
+
+	}
+}
