@@ -1,28 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import './Login.css';
 
-function Login() {
-	const {
-		values,
-		handleChange,
-		errors,
-		isValid,
-		setValues,
-		setIsValid,
-	 } = useFormAndValidation();
+function Login({ handleLogin, isLoggedIn, message, isError }) {
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const navigate = useNavigate();
 
-	 const handleSubmit = (e) => {
-		e.preventDefault();
-		// код сабмита
-	 };
+  useEffect(() => {
+    if (isLoggedIn) navigate('/');
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      const { email, password } = values;
+      handleLogin(email, password);
+    }
+  };
 
   return (
     <section className="login">
       <div className="login__container">
-        <Link to="/" className="login__logo" alt="logo">
-        </Link>
+        <Link to="/" className="login__logo" alt="logo"></Link>
         <h2 className="login__title">Рады видеть!</h2>
         <form className="login__form" onSubmit={handleSubmit}>
           <label className="login__label">
@@ -50,16 +50,17 @@ function Login() {
             <span className="login__error-message">{errors.password}</span>
           </label>
           <div className="login__submit-block">
+          <p className={`login__submit-error ${isError ? 'login__submit-error_type_error' : 'login__submit-error_type_success'}`}>{message}</p>
             <button
-              className={`button-hover login__submit-button ${isValid ? '' : 'login__submit-button_disabled'}`}
-              type="submit"
-              disabled={!isValid}
-            >
-              Войти
+                className="button-hover login__submit-button"
+                type="submit"
+                disabled={!isValid || !values.email || !values.password}
+              >
+                Войти
             </button>
             <p className="login__register-text">
               Ещё не зарегистрированы?{" "}
-              <Link to="/sign-up" className="link login__link">
+              <Link to="/signup" className="link login__link">
                 Регистрация
               </Link>
             </p>

@@ -1,52 +1,71 @@
-import React, { useState } from 'react';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
-import './SearchForm.css';
+import React, { useState, useEffect } from "react";
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import useFormAndValidation from "../../hooks/useFormAndValidation";
+import "./SearchForm.css";
 
-function SearchForm() {
-	const {
-		values,
-		handleChange,
-		errors,
-		isValid,
-		setValues,
-		setIsValid,
-	 } = useFormAndValidation();
+function SearchForm({
+  onMoviesSearch,
+  searchText = "",
+  onSavedMoviesSearch,
+  location,
+}) {
+  const { values, handleChange, errors, isValid, setValues, setIsValid } =
+    useFormAndValidation({ search: searchText || "" });
 
-  const [inputText, setInputText] = useState('');
+  const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
 
+  const handleCheckboxChange = () => {
+    setIsShortMoviesChecked(prev => !prev);
+  };
+  
+  useEffect(() => {
+    handleSubmit(new Event('submit', { cancelable: true }));
+  }, [isShortMoviesChecked]);
 
   const handleSubmit = (e) => {
-		e.preventDefault();
-		// код сабмита
-	 };
+    e.preventDefault();
+    if (!isValid) return;
+
+    if (location === "savedMovies" && onSavedMoviesSearch) {
+      onSavedMoviesSearch(values.search, isShortMoviesChecked);
+    } else {
+      onMoviesSearch(values.search, isShortMoviesChecked);
+    }
+  };
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <div className="search-form__container">
         <input
-          className={`search-form__input ${errors.search ? 'search-form__input-error' : ''}`}
+          className={`search-form__input ${
+            errors.search ? "search-form__input-error" : ""
+          }`}
           type="text"
           placeholder="Фильм"
           name="search"
-          minLength={2}
-          value={values.search || ''}
+          minLength={0}
+          value={values.search}
           onChange={handleChange}
-          required 
+          required
           autoFocus
         />
         <button
-          className={`button-hover search-form__button ${values.search ? 'search-form__button-active' : ''}`}
+          className={`button-hover search-form__button ${
+            values.search ? "search-form__button-active" : ""
+          }`}
           type="submit"
           disabled={!isValid}
-        >
-        </button>
+        ></button>
       </div>
-      {errors.search && <span className="search-form__error">{errors.search}</span>}
-      <FilterCheckbox />
+      {errors.search && (
+        <span className="search-form__error">{errors.search}</span>
+      )}
+      <FilterCheckbox
+        isChecked={isShortMoviesChecked}
+        onChange={handleCheckboxChange}
+      />
     </form>
   );
 }
 
 export default SearchForm;
-

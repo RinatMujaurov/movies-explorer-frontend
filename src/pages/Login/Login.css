@@ -79,6 +79,24 @@
 	outline: none;
 }
 
+.login__submit-error {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 20px;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 13.3px;
+	text-align: center;
+}
+
+.login__submit-error_type_error {
+	color: #EE3465;
+}
+
+.login__submit-error_type_success {
+	color: #4285F4;
+}
+
 .login__submit-button {
 	margin: 0;
 	padding: 0;
@@ -91,6 +109,13 @@
 	font-size: 14px;
 	line-height: auto;
 	color: #fff;
+	cursor: pointer;
+}
+
+.login__submit-button:disabled {
+	background-color: #F8F8F8;
+	color: #C2C2C2;
+	cursor: none;
 }
 
 .login__register-text {

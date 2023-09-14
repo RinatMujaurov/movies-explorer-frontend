@@ -1,15 +1,26 @@
+import React from "react";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
-import { savedMoviesData } from "../../utils/data.js";
-import './SavedMovies.css';
+import "./SavedMovies.css";
 
-function SavedMovies() {
-	return(
-		<>
-			<SearchForm />
-			<MoviesCardList moviesData={savedMoviesData} />
-		</>
-	)
+function SavedMovies({
+  savedMovies,
+  onMovieDelete,
+  onSavedMoviesSearch,
+}) {
+  return (
+    <>
+      <SearchForm
+        onSavedMoviesSearch={onSavedMoviesSearch}
+        location="savedMovies"
+      />
+      <MoviesCardList
+        movies={savedMovies}
+        onMovieDelete={onMovieDelete}
+        location="savedMovies"
+      />
+    </>
+  );
 }
 
 export default SavedMovies;

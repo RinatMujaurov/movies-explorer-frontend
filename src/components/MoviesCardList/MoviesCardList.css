@@ -13,6 +13,17 @@
 	list-style: none;
  }
 
+ .movie-card-list__message {
+	margin: 0;
+	padding: 0;
+	margin-top: 50px;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 15px;
+	text-align: center;
+	color: #EE3465;
+ }
+
  .load-more-block {
 	margin-bottom: 79px;
 	display: flex;

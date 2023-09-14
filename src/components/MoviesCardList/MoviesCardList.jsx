@@ -1,47 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import MoviesCard from '../MoviesCard/MoviesCard';
-import './MoviesCardList.css';
+import MoviesCard from "../MoviesCard/MoviesCard";
+import "./MoviesCardList.css";
 
-function MoviesCardList({ moviesData }) {
-  const [visibleMoviesCount, setVisibleMoviesCount] = useState(12);
-  const totalMoviesCount = moviesData.length;
-
-  useEffect(() => {
-	const handleResize = () => {
-	  if (window.innerWidth < 679) {
-		 setVisibleMoviesCount(5);
-	  } else {
-		 setVisibleMoviesCount(12);
-	  }
-	};
-
-	handleResize(); // Установка видимого количества карточек при первом рендере
-
-	window.addEventListener('resize', handleResize); // Добавление обработчика изменения размера окна
-
-	return () => {
-	  window.removeEventListener('resize', handleResize); // Удаление обработчика при размонтировании компонента
-	};
- }, []);
-
-  const handleLoadMore = () => {
-    setVisibleMoviesCount(visibleMoviesCount + 3);
-  };
-
+function MoviesCardList({
+  movies,
+  location,
+  onMovieSave,
+  onMovieDelete,
+  onMoreButtonClick,
+  isMoreButtonVisible = false,
+  savedMovies,
+  message,
+  isError,
+  searchText,
+}) {
   return (
-    <section className='movies-cards'>
-      <ul className="movies-card-list">
-        {moviesData.slice(0, visibleMoviesCount).map((movie) => (
-          <MoviesCard key={movie.movieId} movieData={movie} />
-        ))}
-      </ul>
-		<div className='load-more-block'>
-			{visibleMoviesCount < totalMoviesCount && (
-        <button className="button-hover load-more-block__button" onClick={handleLoadMore}>
-          Ещё
-        </button>
-      )}
-		</div>
+    <section className="movies-cards">
+      {movies.length > 0 ? (
+        <ul className="movies-card-list">
+          {movies.map((movie, index) => {
+            let isLiked = true;
+            if (location === 'movies') {
+              isLiked = savedMovies.some(savedMovie => savedMovie.movieId === movie.id)
+            }
+            return (
+              <MoviesCard
+                key={index}
+                movieData={movie}
+                onMovieSave={onMovieSave}
+                onMovieDelete={onMovieDelete}
+                isLiked={isLiked}
+                location={location}
+              />
+            );
+          })}
+        </ul>
+      ) : isError ? (
+        <p className='movie-card-list__message'>{message}</p>
+      ) : searchText ? (
+        <p className='movie-card-list__message'>Ничего не найдено</p>
+        ) : ''}
+      <div className="load-more-block">
+        {isMoreButtonVisible && (
+          <button
+            className="button-hover load-more-block__button"
+            onClick={onMoreButtonClick}
+          >
+            Ещё
+          </button>
+        )}
+      </div>
     </section>
   );
 }
