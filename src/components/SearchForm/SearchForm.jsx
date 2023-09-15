@@ -7,7 +7,7 @@ function SearchForm({
   onMoviesSearch,
   searchText = "",
   onSavedMoviesSearch,
-  location,
+  location
 }) {
   const { values, handleChange, errors, isValid, setValues, setIsValid } =
     useFormAndValidation({ search: searchText || "" });
@@ -17,21 +17,24 @@ function SearchForm({
   const handleCheckboxChange = () => {
     setIsShortMoviesChecked(prev => !prev);
   };
-  
-  useEffect(() => {
-    handleSubmit(new Event('submit', { cancelable: true }));
-  }, [isShortMoviesChecked]);
+
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     if (!isValid) return;
-
+ 
     if (location === "savedMovies" && onSavedMoviesSearch) {
       onSavedMoviesSearch(values.search, isShortMoviesChecked);
     } else {
       onMoviesSearch(values.search, isShortMoviesChecked);
     }
   };
+  
+  useEffect(() => {
+    if (isShortMoviesChecked !== undefined) {
+      handleSubmit();
+    }
+  }, [isShortMoviesChecked]); 
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>

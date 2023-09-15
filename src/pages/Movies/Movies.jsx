@@ -13,6 +13,7 @@ function Movies({
   showMovies,
   message,
   isError,
+  isPreloader
 }) {
   const [initialCardsCount, setInitialCardsCount] = React.useState(12);
   const [cardsToAddCount, setCardsToAddCount] = React.useState(3);
@@ -20,7 +21,6 @@ function Movies({
   const moviesToRender = movies.slice(0, visibleMoviesCount);
   const isMoreButtonVisible = moviesToRender.length < movies.length;
   const searchText = localStorage.getItem("searchData");
-  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     showMovies();
@@ -50,25 +50,14 @@ function Movies({
     };
   }, [initialCardsCount]);
 
-  const handleMoviesSearch = async (searchQuery) => {
-	setIsLoading(true); // Установка состояния загрузки в true перед началом загрузки
-	try {
-	  await onMoviesSearch(searchQuery);
-	} catch (error) {
-	  // обработка ошибки (если необходимо)
-	} finally {
-	  setIsLoading(false); // Установка состояния загрузки в false после завершения загрузки
-	}
- };
-
   const handleLoadMore = () => {
     setVisibleMoviesCount(visibleMoviesCount + cardsToAddCount);
   };
 
   return (
 	<>
-	  <SearchForm onMoviesSearch={handleMoviesSearch} searchText={searchText} location="movies" />
-	  {isLoading ? (
+	  <SearchForm onMoviesSearch={onMoviesSearch} searchText={searchText} location="movies" />
+	  {isPreloader ? (
 		 <Preloader /> // Отображение прелоадера, если идет загрузка
 	  ) : (
 		 <MoviesCardList

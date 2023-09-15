@@ -25,9 +25,11 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isPreloader, setIsPreloader] = useState(false);
   const navigate = useNavigate();
 
   const getAllMovies = async () => {
+    setIsPreloader(true);
     try {
       const allMovies = localStorage.getItem("allMovies");
       if (allMovies) {
@@ -46,6 +48,8 @@ function App() {
     } catch (error) {
       console.error("Error in getAllMovies function: ", error);
       return null;
+    } finally {
+      setIsPreloader(false);
     }
   };
 
@@ -68,7 +72,7 @@ function App() {
       handleApiError(error);
     }
   };
-  
+
   const handleApiError = (err) => {
     setIsError(true);
     setMessage(
@@ -76,7 +80,6 @@ function App() {
     );
     console.error(err);
   };
-  
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -98,16 +101,18 @@ function App() {
       console.error(err);
     }
   };
-  
+
   const deleteMovie = async (movieId) => {
     try {
-      const movieToDelete = savedMovies.find((film) => film.movieId === movieId);
+      const movieToDelete = savedMovies.find(
+        (film) => film.movieId === movieId
+      );
       if (!movieToDelete) {
-        throw new Error('Фильм для удаления не найден');
+        throw new Error("Фильм для удаления не найден");
       }
-      
+
       await mainApi.deleteMovie(movieToDelete._id);
-      
+
       setSavedMovies((currentMovies) => {
         const newMovies = currentMovies.filter(
           (film) => film.movieId !== movieId
@@ -155,27 +160,31 @@ function App() {
     handleMoviesSearch(searchText);
   }, [handleMoviesSearch]);
 
-  const handleSavedMoviesSearch = useCallback(async (searchText, isShortMoviesChecked) => {
-    try {
-      const movies = JSON.parse(localStorage.getItem("savedMovies"));
-      if (!movies) throw new Error("No saved movies found in localStorage");
-      
-      const textToLowerCase = searchText.toLowerCase();
-      const filteredMovies = movies.filter((movie) => {
-        return (
-          (movie.nameRU.toLowerCase().includes(textToLowerCase) ||
-            movie.nameEN.toLowerCase().includes(textToLowerCase)) &&
-          (!isShortMoviesChecked || (isShortMoviesChecked && movie.duration <= 40))
-        );
-      });
-      
-      setSavedMovies(filteredMovies);
-      localStorage.setItem("searchData", searchText);
-    } catch (error) {
-      console.error(error);
-      // Здесь можно обработать ошибку, возможно, установить какое-то состояние ошибки
-    }
-  }, []);
+  const handleSavedMoviesSearch = useCallback(
+    async (searchText, isShortMoviesChecked) => {
+      try {
+        const movies = JSON.parse(localStorage.getItem("savedMovies"));
+        if (!movies) throw new Error("No saved movies found in localStorage");
+
+        const textToLowerCase = searchText.toLowerCase();
+        const filteredMovies = movies.filter((movie) => {
+          return (
+            (movie.nameRU.toLowerCase().includes(textToLowerCase) ||
+              movie.nameEN.toLowerCase().includes(textToLowerCase)) &&
+            (!isShortMoviesChecked ||
+              (isShortMoviesChecked && movie.duration <= 40))
+          );
+        });
+
+        setSavedMovies(filteredMovies);
+        localStorage.setItem("searchData", searchText);
+      } catch (error) {
+        console.error(error);
+        // Здесь можно обработать ошибку, возможно, установить какое-то состояние ошибки
+      }
+    },
+    []
+  );
 
   const handleLogin = async (email, password) => {
     try {
@@ -267,6 +276,7 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   message={message}
                   isError={isError}
+                  isPreloader={isPreloader}
                 />
               }
             />
