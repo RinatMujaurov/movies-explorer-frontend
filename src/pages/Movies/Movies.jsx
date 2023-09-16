@@ -3,6 +3,7 @@ import SearchForm from "../../components/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
 import Preloader from "../../components/Preloader/Preloader";
 import "./Movies.css";
+import { CARD_COUNT_TO_ADD_DESC, CARD_COUNT_TO_ADD_MOBILE, INITIAL_CARDS_COUNT_DESCTOP, INITIAL_CARDS_COUNT_MOBILE, INITIAL_CARDS_COUNT_TAB, MOBILE_WIDTH, TAB_WIDTH } from "../../utils/constants/movie-constants";
 
 function Movies({
   movies,
@@ -15,8 +16,8 @@ function Movies({
   isError,
   isPreloader
 }) {
-  const [initialCardsCount, setInitialCardsCount] = React.useState(12);
-  const [cardsToAddCount, setCardsToAddCount] = React.useState(3);
+  const [initialCardsCount, setInitialCardsCount] = React.useState(INITIAL_CARDS_COUNT_DESCTOP);
+  const [cardsToAddCount, setCardsToAddCount] = React.useState(CARD_COUNT_TO_ADD_DESC);
   const [visibleMoviesCount, setVisibleMoviesCount] = React.useState(initialCardsCount);
   const moviesToRender = movies.slice(0, visibleMoviesCount);
   const isMoreButtonVisible = moviesToRender.length < movies.length;
@@ -28,15 +29,15 @@ function Movies({
 
   React.useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 679) {
-        setInitialCardsCount(5);
-        setCardsToAddCount(2);
-      } else if (window.innerWidth <= 899) {
-        setInitialCardsCount(8); // 8 карточек для 4 рядов при ширине 768px
-        setCardsToAddCount(2);   // 2 карточки для дополнительного ряда
+      if (window.innerWidth <= MOBILE_WIDTH) {
+        setInitialCardsCount(INITIAL_CARDS_COUNT_MOBILE);
+        setCardsToAddCount(CARD_COUNT_TO_ADD_MOBILE);
+      } else if (window.innerWidth <= TAB_WIDTH) {
+        setInitialCardsCount(INITIAL_CARDS_COUNT_TAB); // 8 карточек для 4 рядов при ширине 768px
+        setCardsToAddCount(CARD_COUNT_TO_ADD_MOBILE);   // 2 карточки для дополнительного ряда
       } else {
-        setInitialCardsCount(12); // 16 карточек для 4 рядов при ширине 1280px
-        setCardsToAddCount(3);    // 4 карточки для дополнительного ряда
+        setInitialCardsCount(INITIAL_CARDS_COUNT_DESCTOP); // 16 карточек для 4 рядов при ширине 1280px
+        setCardsToAddCount(CARD_COUNT_TO_ADD_DESC);    // 4 карточки для дополнительного ряда
       }
       setVisibleMoviesCount(initialCardsCount); // Обновляем состояние с учетом нового начального значения
     };

@@ -17,14 +17,14 @@ function MoviesCardList({
     <section className="movies-cards">
       {movies.length > 0 ? (
         <ul className="movies-card-list">
-          {movies.map((movie, index) => {
+          {movies.map((movie) => {
             let isLiked = true;
             if (location === 'movies') {
               isLiked = savedMovies.some(savedMovie => savedMovie.movieId === movie.id)
             }
             return (
               <MoviesCard
-                key={index}
+                key={movie._id || movie.id}
                 movieData={movie}
                 onMovieSave={onMovieSave}
                 onMovieDelete={onMovieDelete}
