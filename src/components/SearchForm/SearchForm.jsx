@@ -7,17 +7,17 @@ function SearchForm({
   onMoviesSearch,
   searchText = "",
   onSavedMoviesSearch,
+  shortMoviesCheckedState = false, 
   location
 }) {
-  const { values, handleChange, errors, isValid, setValues, setIsValid } =
+  const { values, handleChange, errors, isValid } =
     useFormAndValidation({ search: searchText || "" });
 
-  const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(false);
+  const [isShortMoviesChecked, setIsShortMoviesChecked] = useState(shortMoviesCheckedState);
 
   const handleCheckboxChange = () => {
     setIsShortMoviesChecked(prev => !prev);
   };
-
 
   const handleSubmit = (e) => {
     e?.preventDefault();

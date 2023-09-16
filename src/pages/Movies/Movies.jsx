@@ -22,6 +22,7 @@ function Movies({
   const moviesToRender = movies.slice(0, visibleMoviesCount);
   const isMoreButtonVisible = moviesToRender.length < movies.length;
   const searchText = localStorage.getItem("searchData");
+  const shortMoviesCheckedState = localStorage.getItem('isShortMoviesChecked') === 'true' ? true : false;
 
   React.useEffect(() => {
     showMovies();
@@ -57,7 +58,7 @@ function Movies({
 
   return (
 	<>
-	  <SearchForm onMoviesSearch={onMoviesSearch} searchText={searchText} location="movies" />
+	  <SearchForm onMoviesSearch={onMoviesSearch} searchText={searchText} shortMoviesCheckedState={shortMoviesCheckedState} location="movies" />
 	  {isPreloader ? (
 		 <Preloader /> // Отображение прелоадера, если идет загрузка
 	  ) : (

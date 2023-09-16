@@ -138,6 +138,7 @@ function App() {
           });
           setMovies(filteredMovies); // Сохраняем отфильтрованный список в состоянии
           localStorage.setItem("searchData", searchText);
+          localStorage.setItem('isShortMoviesChecked', isShortMoviesChecked)
         } else {
           console.error("No films retrieved");
         }
@@ -150,8 +151,9 @@ function App() {
 
   const showMovies = useCallback(() => {
     const searchText = localStorage.getItem("searchData");
+    const isShortMoviesChecked = localStorage.getItem('isShortMoviesChecked') === 'true' ? true : false;
     if (!searchText) return;
-    handleMoviesSearch(searchText);
+    handleMoviesSearch(searchText, isShortMoviesChecked);
   }, [handleMoviesSearch]);
 
   const handleSavedMoviesSearch = useCallback(
@@ -171,10 +173,8 @@ function App() {
         });
 
         setSavedMovies(filteredMovies);
-        localStorage.setItem("searchData", searchText);
       } catch (error) {
         console.error(error);
-        // Здесь можно обработать ошибку, возможно, установить какое-то состояние ошибки
       }
     },
     []
