@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Register.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function Register({ handleRegister, isLoggedIn, message, isError }) {
+function Register({ handleRegister, isLoggedIn, message, isError, isFetching }) {
  
   const {
     values,
@@ -75,7 +75,7 @@ function Register({ handleRegister, isLoggedIn, message, isError }) {
             <button
               type="submit"
               className={`button-hover login__submit-button`}
-              disabled={!isValid || !values.name || !values.email || !values.password}
+              disabled={!isValid || !values.name || !values.email || !values.password || isFetching}
             >
               Зарегистрироваться
             </button>

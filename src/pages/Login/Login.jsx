@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import './Login.css';
 
-function Login({ handleLogin, isLoggedIn, message, isError }) {
+function Login({ handleLogin, isLoggedIn, message, isError, isFetching }) {
   const { values, handleChange, errors, isValid } = useFormAndValidation();
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ function Login({ handleLogin, isLoggedIn, message, isError }) {
             <button
                 className="button-hover login__submit-button"
                 type="submit"
-                disabled={!isValid || !values.email || !values.password}
+                disabled={!isValid || !values.email || !values.password || isFetching}
               >
                 Войти
             </button>

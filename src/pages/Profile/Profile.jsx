@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Profile.css';
 import useFormAndValidation from '../../hooks/useFormAndValidation'; 
 
-function Profile({ onSignOut, onUpdateUser, currentUser }) {
+function Profile({ onSignOut, onUpdateUser, currentUser, isFetching }) {
 	const [isActive, setIsActive] = useState(false);
 	const [isError, setIsError] = useState(false);
 	const [profileMessage, setProfileMessage] = useState('');
@@ -83,7 +83,7 @@ function Profile({ onSignOut, onUpdateUser, currentUser }) {
             <button
               type="submit"
               className='button-hover profile__save-button'
-              disabled={!isValid || (values.email === currentUser.email && values.name === currentUser.name)}
+              disabled={!isValid || (values.email === currentUser.email && values.name === currentUser.name) || isFetching}
             >
               Сохранить
             </button>

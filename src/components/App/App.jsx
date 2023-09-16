@@ -25,6 +25,7 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
   const [isPreloader, setIsPreloader] = useState(false);
   const navigate = useNavigate();
 
@@ -181,6 +182,7 @@ function App() {
 
   const handleLogin = async (email, password) => {
     try {
+      setIsFetching(true);
       const res = await Auth.login(email, password);
       localStorage.setItem("jwt", res.token);
       setIsLoggedIn(true);
@@ -191,11 +193,14 @@ function App() {
       console.log(err);
       setIsError(true);
       setMessage("Что-то пошло не так! Попробуйте еще раз.");
+    } finally {
+      setIsFetching(false);
     }
   };
 
   const handleRegister = async (name, email, password) => {
     try {
+      setIsFetching(true);
       await Auth.register(name, email, password);
       await handleLogin(email, password);
       setIsError(false);
@@ -204,10 +209,13 @@ function App() {
       console.log(err);
       setIsError(true);
       setMessage("Что-то пошло не так! Попробуйте еще раз.");
+    } finally {
+      setIsFetching(false);
     }
   };
 
   const onUpdateUser = (data) => {
+    setIsFetching(true)
     return mainApi
       .setUserInfo(data)
       .then((user) => {
@@ -216,7 +224,10 @@ function App() {
       .catch((error) => {
         console.error("Error updating user info: ", error);
         return Promise.reject(error);
-      });
+      })
+      .finally(() => {
+        setIsFetching(false)
+      })
   };
 
   useEffect(() => {
@@ -293,6 +304,7 @@ function App() {
                   isError={isError}
                   handleLogin={handleLogin}
                   isLoggedIn={isLoggedIn}
+                  isFetching={isFetching}
                 />
               }
             />
@@ -304,6 +316,7 @@ function App() {
                   isError={isError}
                   handleRegister={handleRegister}
                   isLoggedIn={isLoggedIn}
+                  isFetching={isFetching}
                 />
               }
             />
@@ -316,6 +329,7 @@ function App() {
                   onUpdateUser={onUpdateUser}
                   isLoggedIn={isLoggedIn}
                   onSignOut={onSignOut}
+                  isFetching={isFetching}
                 />
               }
             />
