@@ -180,12 +180,24 @@ function App() {
     []
   );
 
+  const handleTokenCheck = async (token) => {
+    try {
+      const res = await Auth.checkToken(token);
+      if (res) {
+        setIsLoggedIn(true);
+        setCurrentUser(res);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleLogin = async (email, password) => {
     try {
       setIsFetching(true);
       const res = await Auth.login(email, password);
       localStorage.setItem("jwt", res.token);
-      setIsLoggedIn(true);
+      await handleTokenCheck(res.token);
       navigate("/movies");
       setIsError(false);
       setMessage("Авторизация прошла успешно");
@@ -215,7 +227,7 @@ function App() {
   };
 
   const onUpdateUser = (data) => {
-    setIsFetching(true)
+    setIsFetching(true);
     return mainApi
       .setUserInfo(data)
       .then((user) => {
@@ -226,23 +238,15 @@ function App() {
         return Promise.reject(error);
       })
       .finally(() => {
-        setIsFetching(false)
-      })
+        setIsFetching(false);
+      });
   };
 
   useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem("jwt");
       if (token) {
-        try {
-          const res = await Auth.checkToken(token);
-          if (res) {
-            setIsLoggedIn(true);
-            setCurrentUser(res);
-          }
-        } catch (err) {
-          console.log(err);
-        }
+        await handleTokenCheck(token);
       }
       setIsLoading(false);
     };
