@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 import './NavTab.css';
 
 function NavTab() {
@@ -8,9 +8,15 @@ function NavTab() {
       <div className="nav-tab__block">
         <h1 className="main__title">Учебный проект студента&nbsp; факультета Веб-разработки.</h1>
         <ul className="nav-tab__links">
-          <li className="link nav-tab__link">О проекте</li>
-          <li className="link nav-tab__link">Технологии</li>
-          <li className="link nav-tab__link">Студент</li>
+          <li>
+            <Link className="link nav-tab__link" smooth to="#about-project">О проекте</Link>
+          </li>
+          <li>
+            <Link className="link nav-tab__link" smooth to="#techs">Технологии</Link>
+          </li>
+          <li>
+            <Link className="link nav-tab__link" smooth to="#about-me">Студент</Link>
+          </li>
         </ul>
       </div>
     </section>
