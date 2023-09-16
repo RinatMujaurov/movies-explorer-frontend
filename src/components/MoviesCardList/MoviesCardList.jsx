@@ -36,7 +36,7 @@ function MoviesCardList({
         </ul>
       ) : isError ? (
         <p className='movie-card-list__message'>{message}</p>
-      ) : searchText ? (
+      ) : searchText || location === 'savedMovies' ? (
         <p className='movie-card-list__message'>Ничего не найдено</p>
         ) : ''}
       <div className="load-more-block">
