@@ -69,6 +69,7 @@ function Profile({ onSignOut, onUpdateUser, currentUser }) {
               type="email"
               name="email"
               placeholder="E-mail"
+              pattern="^[\w]+@[a-zA-Z]+\.[a-zA-Z]{1,3}$"
               value={values.email || ''}
               disabled={!isActive}
               onChange={handleChange}

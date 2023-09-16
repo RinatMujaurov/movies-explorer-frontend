@@ -52,6 +52,7 @@ function Register({ handleRegister, isLoggedIn, message, isError }) {
               type="email"
               name="email"
               value={values.email || ''}
+              pattern="^[\w]+@[a-zA-Z]+\.[a-zA-Z]{1,3}$"
               onChange={handleChange}
               required
             />
