@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import Main from "./pages/Main/Main";
-import Movies from "./pages/Movies/Movies";
-import SavedMovies from "./pages/SavedMovies/SavedMovies";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import Profile from "./pages/Profile/Profile";
-import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import * as Auth from "./utils/Auth";
-import mainApi from "./utils/MainApi";
-import moviesApi from "./utils/MoviesApi";
-import CurrentUserContext from "./contexts/CurrentUserContext";
-import Preloader from "./components/Preloader/Preloader";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import Main from "../../pages/Main/Main";
+import Movies from "../../pages/Movies/Movies";
+import SavedMovies from "../../pages/SavedMovies/SavedMovies";
+import Login from "../../pages/Login/Login";
+import Register from "../../pages/Register/Register";
+import Profile from "../../pages/Profile/Profile";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import ProtectedRoute from "../../components/ProtectedRoute/ProtectedRoute";
+import * as Auth from "../../utils/Auth";
+import mainApi from "../../utils/MainApi";
+import moviesApi from "../../utils/MoviesApi";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import Preloader from "../Preloader/Preloader";
 import "./App.css";
 
 function App() {
