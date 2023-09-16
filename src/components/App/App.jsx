@@ -37,17 +37,14 @@ function App() {
         setMovies(movies);
         return movies;
       }
-      try {
-        const films = await moviesApi.getInitialMovies();
-        setMovies(films);
-        localStorage.setItem("allMovies", JSON.stringify(films));
-        return films;
-      } catch (err) {
-        handleApiError(err);
-      }
-    } catch (error) {
-      console.error("Error in getAllMovies function: ", error);
-      return null;
+      const films = await moviesApi.getInitialMovies();
+      setMovies(films);
+      localStorage.setItem("allMovies", JSON.stringify(films));
+      return films;
+    } catch (err) {
+      handleApiError(err);
+      console.error("Error in getAllMovies function: ", err);
+      // return null;
     } finally {
       setIsPreloader(false);
     }
@@ -57,13 +54,9 @@ function App() {
     try {
       const savedMovies = localStorage.getItem("savedMovies");
       if (!savedMovies) {
-        try {
-          const films = await mainApi.getSavedMovies();
-          setSavedMovies(films);
-          localStorage.setItem("savedMovies", JSON.stringify(films));
-        } catch (err) {
-          handleApiError(err);
-        }
+        const films = await mainApi.getSavedMovies();
+        setSavedMovies(films);
+        localStorage.setItem("savedMovies", JSON.stringify(films));
       } else {
         setSavedMovies(JSON.parse(savedMovies));
       }
